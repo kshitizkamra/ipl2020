@@ -1,0 +1,444 @@
+<!doctype html>
+<html>
+
+<body>
+<form action="{{ url_for('main') }}" method="POST">
+<div class=team1>
+
+  <br>
+   <b><i>Home Team: </b></i>
+  <div class="autocomplete">
+    <input id="team1" type="text" name="team1" placeholder="Team1">
+	</div>
+	
+  	  Player 1:
+	  <div class="autocomplete">
+      <input id="player1" type="text" name="player1" placeholder="Player">
+	  </div>
+	  Player 2:
+	  <div class="autocomplete">
+      <input id="player2" type="text" name="player2" placeholder="Player">
+	  </div>
+	  Player 3:
+	  <div class="autocomplete">
+      <input id="player3" type="text" name="player3" placeholder="Player">
+	  </div>
+	  Player 4:
+	  <div class="autocomplete">
+      <input id="player4" type="text" name="player4" placeholder="Player">
+	  </div>
+	  <br><br><br>
+	  Player 5:
+	  <div class="autocomplete">
+      <input id="player5" type="text" name="player5" placeholder="Player">
+	  </div>
+	  
+	  Player 6:
+	  <div class="autocomplete">
+      <input id="player6" type="text" name="player6" placeholder="Player">
+	  </div>
+	  Player 7:
+	  <div class="autocomplete">
+      <input id="player7" type="text" name="player7" placeholder="Player">
+	  </div>
+	  Player 8:
+	  <div class="autocomplete">
+      <input id="player8" type="text" name="player8" placeholder="Player">
+	  </div>
+	  Player 9:
+	  <div class="autocomplete">
+      <input id="player9" type="text" name="player9" placeholder="Player">
+	  </div>
+	  <br><br><br>
+	  Player 10:
+	  <div class="autocomplete">
+      <input id="player10" type="text" name="player10" placeholder="Player">
+	  </div>
+	  Player 11:
+	  <div class="autocomplete">
+      <input id="player11" type="text" name="player11" placeholder="Player">
+	  </div>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+  
+
+</div>
+<div class=team2>
+  <br>
+   <b> <i> Away Team: </b> </i>
+  <div class="autocomplete">
+    <input id="team2" type="text" name="team2" placeholder="Team2">
+	</div>
+	
+  	  Player 1:
+	  <div class="autocomplete">
+      <input id="player12" type="text" name="player12" placeholder="Player">
+	  </div>
+	  Player 2:
+	  <div class="autocomplete">
+      <input id="player13" type="text" name="player13" placeholder="Player">
+	  </div>
+	  Player 3:
+	  <div class="autocomplete">
+      <input id="player14" type="text" name="player14" placeholder="Player">
+	  </div>
+	  Player 4:
+	  <div class="autocomplete">
+      <input id="player15" type="text" name="player15" placeholder="Player">
+	  </div>
+	  <br><br><br>
+	  Player 5:
+	  <div class="autocomplete">
+      <input id="player16" type="text" name="player16" placeholder="Player">
+	  </div>
+	  Player 6:
+	  <div class="autocomplete">
+      <input id="player17" type="text" name="player17" placeholder="Player">
+	  </div>
+	  Player 7:
+	  <div class="autocomplete">
+      <input id="player18" type="text" name="player18" placeholder="Player">
+	  </div>
+	  Player 8:
+	  <div class="autocomplete">
+      <input id="player19" type="text" name="player19" placeholder="Player">
+	  </div>
+	  Player 9:
+	  <div class="autocomplete">
+      <input id="player20" type="text" name="player20" placeholder="Player">
+	  </div>
+	  <br><br><br>
+	  Player 10:
+	  <div class="autocomplete">
+      <input id="player21" type="text" name="player21" placeholder="Player">
+	  </div>
+	  Player 11:
+	  <div class="autocomplete">
+      <input id="player22" type="text" name="player22" placeholder="Player">
+	  </div>
+	<br>
+	<br>
+	<br>
+	<br>
+	
+  
+
+</div>
+
+
+<div class=team3>
+
+<div class=team4>
+   Toss Winner:
+  <select name="toss" id="toss">
+  <option value="team1">Home Team</option>
+   <option value="team2">Away Team</option>
+  </select>
+  </div>
+  <div class=team4>
+   Selection:
+  <select name="inning" id="innning">
+  <option value="batting">Batting</option>
+   <option value="bowling">Bowling</option>
+  </select>
+  </div>
+</div>
+
+<div class=team3>
+<input type="submit" value="Predict">
+
+</div>
+
+<div class="team3" >
+<div class="team4" style="align:center">
+{% for table in tables %}
+            {{titles[loop.index]}}
+            {{ table|safe }}
+{% endfor %}
+</div>
+<div class="team4" style="align:center">
+
+{% for table in tables1 %}
+            {{titles[loop.index]}}
+            {{ table|safe }}
+{% endfor %}
+</div>
+</div>
+
+
+
+</form>
+</body>
+
+
+
+
+<script>
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ['Sunrisers Hyderabad', 'Mumbai Indians', 'Royal Challengers Bangalore',
+       'Kolkata Knight Riders', 'Delhi Daredevils', 'Kings XI Punjab',
+       'Chennai Super Kings', 'Rajasthan Royals'];
+var players = ['MS Dhoni','AT Rayudu','KM Asif','DL Chahar','DJ Bravo','F du Plessis','Imran Tahir','Narayan Jagadeesan','KV Sharma','KM Jadhav','L Ngidi','MJ Santner','Monu Singh','M Vijay','RA Jadeja','Ruturaj Gaikwad','SR Watson','SN Thakur','J Hazlewood','PP Chawla','R Sai Kishore','SM Curran','SS Iyer','AM Rahane','A Mishra','Avesh Khan','AR Patel','HV Patel','I Sharma','K Rabada','K Paul','PP Shaw','R Ashwin','RR Pant','S Lamichhane','S Dhawan','A Carey','L Yadav','MP Stoinis','MM Sharma','SO Hetmyer','T Deshpande','D Sams','A Nortje','V Kohli','AB de Villiers','D Padikkal','Gurkeerat Singh','MM Ali','Mohammed Siraj','N Saini','PA Patel','P Negi','S Dube','UT Yadav','Washington Sundar','YS Chahal','AJ Finch','CH Morris','DW Steyn','I Udana','J Philippe','P Deshpande','S Ahamad','A Zampa','RG Sharma','AP Tare','A Singh','AS Roy','DS Kulkarni','HH Pandya','Ishan Kishan','JJ Bumrah','J Yadav','KA Pollard','KH Pandya','MJ McClenaghan','Q de Kock','RD Chahar','S Rutherford','SA Yadav','TA Boult','CA Lynn','D Deshmukh','M Khan','NM Coulter-Nile','Prince Balwant Rai Singh','SS Tiwary','J Pattinson','KL Rahul','Arshdeep Singh','CH Gayle','D Nalkande','K Gowtham','GC Viljoen','Harpreet Brar','J Suchith','KK Nair','Mandeep Singh','MA Agarwal','Mohammed Shami','Mujeeb Ur Rahman','M Ashwin','N Pooran','SN Khan','CJ Jordan','DJ Hooda','GJ Maxwell','Ishan Porel','JDS Neesham','Prabhsimran Singh','R Bishnoi','S Cottrell','T Dhillon','KD Karthik','AD Russell','Kamlesh Nagarkoti','Kuldeep Yadav','LH Ferguson','N Rana','M Prasidh Krishna','RK Singh','S Sandeep Warrier','Shivam Mavi','Shubman Gill','SD Lad','SP Narine','Chris Green','EJG Morgan','M Siddharth','NS Naik','PJ Cummins','Ra Tripathi','Tom Banton','Varun Chakravarthy','SPD Smith','AS Rajpoot','BA Stokes','JC Archer','JC Buttler','MK Lomror','M Vohra','M Markande','R Tewatia','R Parag','SV Samson','Shashank Singh','S Gopal','VR Aaron','Akash Singh','Anirudha Joshi','Anuj Rawat','AJ Tye','DA Miller','JD Unadkat','Kartik Tyagi','O Thomas','RV Uthappa','TK Curran','Yashasvi Jaiswal','DA Warner','Abhishek Sharma','Basil Thampi','B Kumar','B Stanlake','JM Bairstow','KS Williamson','MK Pandey','Mohammad Nabi','Rashid Khan','Sandeep Sharma','S Nadeem','SP Goswami','S Kaul','Khaleel Ahmed','T Natarajan','V Shankar','WP Saha','Abdul Samad','Fabian Allen','MR Marsh','Priyam Garg','Sandeep Bavanaka','Sanjay Yadav','Virat Singh'];
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("team1"), countries);
+autocomplete(document.getElementById("player1"), players);
+autocomplete(document.getElementById("player2"), players);
+autocomplete(document.getElementById("player3"), players);
+autocomplete(document.getElementById("player4"), players);
+autocomplete(document.getElementById("player5"), players);
+autocomplete(document.getElementById("player6"), players);
+autocomplete(document.getElementById("player7"), players);
+autocomplete(document.getElementById("player8"), players);
+autocomplete(document.getElementById("player9"), players);
+autocomplete(document.getElementById("player10"), players);
+autocomplete(document.getElementById("player11"), players);
+autocomplete(document.getElementById("team2"), countries);
+autocomplete(document.getElementById("player12"), players);
+autocomplete(document.getElementById("player13"), players);
+autocomplete(document.getElementById("player14"), players);
+autocomplete(document.getElementById("player15"), players);
+autocomplete(document.getElementById("player16"), players);
+autocomplete(document.getElementById("player17"), players);
+autocomplete(document.getElementById("player18"), players);
+autocomplete(document.getElementById("player19"), players);
+autocomplete(document.getElementById("player20"), players);
+autocomplete(document.getElementById("player21"), players);
+autocomplete(document.getElementById("player22"), players);
+
+
+
+
+</script>
+
+
+
+<style>
+
+.result {
+    margin: auto;
+    width: 35%;
+    border: 1px solid #ccc;
+}
+
+.team1 {
+width :100%;
+	float : left;
+	position : relative;
+	text-align: center;
+	border: 1px solid black;
+	content: "\200B";
+}
+
+.team2 {
+width :100%;
+	float : left;
+	position : relative;
+	text-align: center;
+	border: 1px solid black;
+	content: "\200B";
+}
+
+.team3 {
+width :100%;
+	float : left;
+	position : relative;
+	text-align: center;
+	border: 1px solid black;
+	 font-size: 16px;
+	content: "\200B";
+}
+
+.team4 {
+width :49.8%;
+	float : left;
+	position : relative;
+	text-align: center;
+	border: 1px solid black;
+	 font-size: 16px;
+	content: "\200B";
+}
+
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 12px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  
+}
+
+.lmresult {
+    margin: auto;
+    width: 100%;
+    border: 1px solid #ccc;
+}
+
+select {
+ border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9; 
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+
+</style>
+<head>
+    <title>IPL-2020</title>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

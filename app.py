@@ -3,11 +3,16 @@ import pickle
 import pandas as pd
 
 filename = 'lm.pkl'
-lm=pickle.load(open(filename, 'rb'))
+
+
+with open(filename, 'rb') as file:  
+    lm = pickle.load(file)
+
 
 filename = 'rf.pkl'
-rf=pickle.load(open(filename, 'rb'))
 
+with open(filename, 'rb') as file:  
+    rf = pickle.load(file)
 
 
 app = flask.Flask(__name__, template_folder='templates')

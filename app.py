@@ -1,6 +1,7 @@
 import flask
 import pickle
 import pandas as pd
+import sklearn
 
 
 filename = 'lm.pkl'

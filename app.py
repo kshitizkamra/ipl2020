@@ -4,14 +4,14 @@ import pandas as pd
 import sklearn
 
 
-filename = 'lm.pkl'
-lm=pickle.load(open(filename, 'rb'))
+lm_model = 'lm.pkl'
+lm=pickle.load(open(lm_model, 'rb'))
 
 
 
 
-filename1 = 'rf.pkl'
-rf=pickle.load(open(filename1, 'rb'))
+rf_model = 'rf.pkl'
+rf=pickle.load(open(rf_model, 'rb'))
 
 
 
